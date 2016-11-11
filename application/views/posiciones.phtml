@@ -1,0 +1,17 @@
+<table id='tblpos'>
+<?php
+	for($i=0;$i<6;$i++):?>
+		<tr>
+		<?php
+		for($j=0;$j<6;$j++):?>
+			<td class='tdpos' id='td_<?=$i*6+$j?>'><?=$i*6+$j?></td>
+		<?php
+		endfor;?>
+		</tr>
+	<?php
+	endfor;?>
+</table>
+<br>
+<form action='/banaval/iniciar' method='post' id='frmpos'>	
+	<input id='btnseguir' type='submit' value='Continuar' disabled>
+</form>

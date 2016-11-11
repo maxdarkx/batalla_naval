@@ -1,0 +1,33 @@
+<h2>Tablero Máquina</h2>
+<table id='tbluser1'>
+<?php
+	for($i=0;$i<6;$i++):?>
+		<tr>
+		<?php
+		for($j=0;$j<6;$j++):?>
+			
+			<td class='tdpos1' id='td1_<?=$i*6+$j?>'><?=$i*6+$j?></td>
+		<?php
+		endfor;?>
+		</tr>
+	<?php
+	endfor;?>
+</table>
+
+<h2>Mi Tablero</h2>
+<table id='tbluser2'>
+<?php
+	for($i=0;$i<6;$i++):?>
+		<tr>
+		<?php
+		for($j=0;$j<6;$j++):
+			$estado=(in_array($i*6+$j,$user2))?'estado1':'estado0';?>
+			<td class='tdpos2 <?=$estado?>' id='td2_<?=$i*6+$j?>'><?=$i*6+$j?></td>
+		<?php
+		endfor;?>
+		</tr>
+	<?php
+	endfor;?>
+</table>
+<br>
+
