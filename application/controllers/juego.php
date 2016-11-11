@@ -15,15 +15,22 @@ class Juego extends CI_Controller {
 
 	public function iniciar()
 	{
-		$idp=$this->juego->iniciarPartida($this->session->jugador,1);
-
+		//$idp= id de la partida en curso
+		$idp=$this->juego->iniciarPartida(1,$this->session->jugador);
 		$this->session->idp=$idp;
+		echo "partida=".$idp."<br>";
+
+		//posiciones es un arreglo que viene de posiciones
 		$posuser=$this->input->post('posiciones');
-		$this->juego->guardarPosiciones($idp,$this->session->jugador,$posuser);
 		$data['user2']=$posuser;
+		$this->juego->guardarPosiciones($idp,$this->session->jugador,$posuser);
+		
 		
 		$posmachine=$this->juego->iniciarJuegoMaquina($idp);
 		$data['user1']=$posmachine;
+
+		//var_dump($data);
+
 		$this->load->view('juego.phtml',$data);
 	}
 
