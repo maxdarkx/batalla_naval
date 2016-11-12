@@ -57,6 +57,8 @@ $route['posiciones']='juego/posiciones';
 $route['iniciar']='juego/iniciar';
 
 $route['jugar']='juego/jugar';
+$route['destroySession']='juego/destroy';
+$route['finPartida']='juego/guardarPartida';
 //$route['posiciones/(:num)/(:any)']='juego/
 //posiciones/$1/$2';
 

@@ -6,10 +6,13 @@ class Juego extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+
 		$this->session->jugador=2;
 	}
 	public function posiciones()
 	{
+		//$ses=(isset($this->session->winU))?"true":"false";
+		//echo ("Session:"+$ses);
 		$this->load->view('posiciones.phtml');
 	}
 
@@ -37,6 +40,7 @@ class Juego extends CI_Controller {
 		$this->load->view('juego.phtml',$data);
 		$this->session->winM=0;
 		$this->session->winU=0;
+		$this->session->mov=0;
 	}
 
 	public function jugar()
@@ -49,15 +53,25 @@ class Juego extends CI_Controller {
 		$posicion=$this->input->get('posicion');
 		$datos=$this->juego->jugar($posicion,1,$this->session->idp);
 		$datos2=$this->juego->jugar($posMac,2,$this->session->idp);
+		$this->session->mov++;
+
 		echo json_encode(['resultado'=>'ok',
 						'estado'=>$datos['estado'],
 						'miestado'=>$datos2['estado'],
 						'posicion'=>$posicion,
 						'ataque'=>$posMac,
 						'wmac'=>$this->session->winM,
-						'wus'=>$this->session->winU]);
-		//echo json_encode(['resultado'=>'ok','estado'=>$datos['estado'],'posicion'=>$posicion]);
+						'wus' =>$this->session->winU,
+						'mov' =>$this->session->mov]);
+	}
 
-
+	public function destroy()
+	{
+		session_destroy();
+	}
+	public function guardarPartida()
+	{
+		$winner=$this->input->get('ganador');
+		$this->juego->guardar($winner);
 	}
 }

@@ -6,7 +6,7 @@
 		<?php
 		for($j=0;$j<6;$j++):?>
 			
-			<td><input class='tdpos1' id='td1_<?=$i*6+$j?>'><?=$i*6+$j?></td>
+			<td><input class='tdpos1' id='td1_<?=$i*6+$j?>' value='<?=$i*6+$j?>'></td>
 		<?php
 		endfor;?>
 		</tr>
@@ -22,15 +22,15 @@
 		<?php
 		for($j=0;$j<6;$j++):
 			$estado=(in_array($i*6+$j,$user2))?'estado1':'estado0';?>
-			<td><input class='tdpos2 <?=$estado?>' id='td2_<?=$i*6+$j?>'><?=$i*6+$j?></td>
+			<td><input class='tdpos2 <?=$estado?>' id='td2_<?=$i*6+$j?>' value='<?=$i*6+$j?>'></td>
 		<?php
 		endfor;?>
 		</tr>
 	<?php
 	endfor;?>
 </table>
-<form action='' method='post' id='busy'>
-	<input id='bCheck' type='button' value='Chequear'>
+<form action='/banaval/posiciones' method='post' id='resetear'>
+	<input id='reset' type='submit' value='Reset'>
 
 </form>
 <br>
