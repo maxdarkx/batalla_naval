@@ -37,7 +37,7 @@ class Juego extends CI_Controller {
 	public function jugar()
 	{
 		$posicion=$this->input->get('posicion');
-		$datos=$this->juego->jugar($posicion,2,$this->session->idp);
+		$datos=$this->juego->jugar($posicion,1,$this->session->idp);
 		echo json_encode(['resultado'=>'ok','estado'=>$datos['estado'],'posicion'=>$posicion]);
 
 

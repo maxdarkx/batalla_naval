@@ -31,6 +31,7 @@ class Juego_model extends CI_Model
     $this->guardarPosiciones($partida,1,$posmachine);
     return $posmachine;
   }
+
   public function guardarPosiciones($partida,$user,$posiciones)
   {
       $inipos=range(0,35);
@@ -51,9 +52,7 @@ class Juego_model extends CI_Model
         {
           $registers[]=['usuario'=>$user,'partida'=>$partida,'posicion'=>$i,'estado'=>'0'];//VACIO
         }
-      }
-
-      
+      } 
       $this->db->insert_batch('juegos',$registers);
   }
 
@@ -66,7 +65,8 @@ class Juego_model extends CI_Model
      $this->db->where('posicion',$pos);
      $query=$this->db->get();
      $registro=$query->row();
-     $datos['estado']=$registro->estado;
+     
+
      switch ($registro->estado) {
          case 0:
               $registro->estado=3;
@@ -75,8 +75,10 @@ class Juego_model extends CI_Model
               $registro->estado=2;
               break;
           }
+     $datos['estado']=$registro->estado;
      $this->db->where('id',$registro->id);
      $this->db->update('juegos',['estado'=>$registro->estado]);
+     
      return $datos;
   }
 }
