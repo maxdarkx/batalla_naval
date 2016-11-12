@@ -18,6 +18,7 @@ class Juego extends CI_Controller {
 		//$idp= id de la partida en curso
 		$idp=$this->juego->iniciarPartida(1,$this->session->jugador);
 		$this->session->idp=$idp;
+		
 		echo "partida=".$idp."<br>";
 
 		//posiciones es un arreglo que viene de posiciones
@@ -29,23 +30,34 @@ class Juego extends CI_Controller {
 		$posmachine=$this->juego->iniciarJuegoMaquina($idp);
 		$data['user1']=$posmachine;
 
-		//var_dump($data);
-
+		$attack=range(0,35);
+		shuffle($attack);
+		$this->session->attack=$attack;
+		$this->session->nattack=0;
 		$this->load->view('juego.phtml',$data);
+		$this->session->winM=0;
+		$this->session->winU=0;
 	}
 
 	public function jugar()
 	{
+		$i=$this->session->nattack;
+		$this->session->nattack++;
+		$posMac=$this->session->attack[$i];
+
+		
 		$posicion=$this->input->get('posicion');
 		$datos=$this->juego->jugar($posicion,1,$this->session->idp);
-		echo json_encode(['resultado'=>'ok','estado'=>$datos['estado'],'posicion'=>$posicion]);
+		$datos2=$this->juego->jugar($posMac,2,$this->session->idp);
+		echo json_encode(['resultado'=>'ok',
+						'estado'=>$datos['estado'],
+						'miestado'=>$datos2['estado'],
+						'posicion'=>$posicion,
+						'ataque'=>$posMac,
+						'wmac'=>$this->session->winM,
+						'wus'=>$this->session->winU]);
+		//echo json_encode(['resultado'=>'ok','estado'=>$datos['estado'],'posicion'=>$posicion]);
 
 
 	}
-
-
-	public function obtenerPosiciones(){}
-	public function actualizarJuego(){}
-
-
 }

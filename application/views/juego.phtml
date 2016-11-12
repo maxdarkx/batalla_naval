@@ -6,7 +6,7 @@
 		<?php
 		for($j=0;$j<6;$j++):?>
 			
-			<td class='tdpos1' id='td1_<?=$i*6+$j?>'><?=$i*6+$j?></td>
+			<td><input class='tdpos1' id='td1_<?=$i*6+$j?>'><?=$i*6+$j?></td>
 		<?php
 		endfor;?>
 		</tr>
@@ -22,7 +22,7 @@
 		<?php
 		for($j=0;$j<6;$j++):
 			$estado=(in_array($i*6+$j,$user2))?'estado1':'estado0';?>
-			<td class='tdpos2 <?=$estado?>' id='td2_<?=$i*6+$j?>'><?=$i*6+$j?></td>
+			<td><input class='tdpos2 <?=$estado?>' id='td2_<?=$i*6+$j?>'><?=$i*6+$j?></td>
 		<?php
 		endfor;?>
 		</tr>
